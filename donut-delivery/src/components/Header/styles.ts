@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
-  background-color: ${({ theme }) => theme["gray-100"]};
+  background-color: ${({ theme }) => theme['gray-100']};
 
   height: 10.4rem;
   margin: 0 auto;
@@ -23,10 +23,10 @@ export const HeaderContainer = styled.header`
     align-items: center;
     gap: 1.2rem;
   }
-`;
+`
 
 export const ShoppingCartWrapping = styled(NavLink)`
-  background-color: ${({ theme }) => theme["yellow-100"]};
+  background-color: ${({ theme }) => theme['yellow-100']};
 
   position: relative;
   display: block;
@@ -37,7 +37,7 @@ export const ShoppingCartWrapping = styled(NavLink)`
 
   > span:not(:empty) {
     color: ${({ theme }) => theme.white};
-    background-color: ${({ theme }) => theme["yellow-900"]};
+    background-color: ${({ theme }) => theme['yellow-900']};
     font-size: 1.2rem;
     font-weight: 700;
 
@@ -53,16 +53,16 @@ export const ShoppingCartWrapping = styled(NavLink)`
   }
 
   > svg {
-    color: ${({ theme }) => theme["yellow-900"]};
+    color: ${({ theme }) => theme['yellow-900']};
 
     width: 2.2rem;
     height: 2.2rem;
   }
-`;
+`
 
 export const Location = styled.span`
-  color: ${({ theme }) => theme["purple-900"]};
-  background-color: ${({ theme }) => theme["purple-100"]};
+  color: ${({ theme }) => theme['purple-900']};
+  background-color: ${({ theme }) => theme['purple-100']};
   font-size: 1.4rem;
 
   padding: 0.8rem;
@@ -75,6 +75,6 @@ export const Location = styled.span`
   > svg {
     width: 2.2rem;
     height: 2.2rem;
-    color: ${({ theme }) => theme["purple-500"]};
+    color: ${({ theme }) => theme['purple-500']};
   }
-`;
+`

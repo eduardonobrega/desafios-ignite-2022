@@ -1,0 +1,31 @@
+.button {
+  background-color: var(--blue-dark);
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  border-radius: 8px;
+  padding: 1.6rem;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--blue);
+}
+
+.button > svg {
+  flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+@media (max-width: 340px) {
+  .button > span {
+    display: none;
+  }
+}

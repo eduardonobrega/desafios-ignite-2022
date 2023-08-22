@@ -1,9 +1,10 @@
 import { PostContainer } from './styles'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import { PostInfo } from './components/PostInfo'
 import { PostContent } from './components/PostContent'
+import { api } from '../../lib/axios'
+import { Spinner } from '../../components/Spinner'
 
 export interface PostType {
   id: number
@@ -25,17 +26,20 @@ export interface IssuesResponse {
   html_url: string
 }
 
+const username = import.meta.env.VITE_GITHUB_USERNAME
+const repoName = import.meta.env.VITE_GITHUB_REPONAME
+
 export function Post() {
   const [post, setPost] = useState<PostType>({} as PostType)
+  const [isLoading, setIsLoading] = useState(true)
 
   const { postId } = useParams()
 
-  useEffect(() => {
-    async function fetchPost() {
-      const url = `https://api.github.com/repos/eduardonobrega/github-blog/issues/${postId}`
-
-      const response: IssuesResponse = await axios
-        .get(url)
+  const fetchPost = useCallback(async () => {
+    try {
+      setIsLoading(true)
+      const response: IssuesResponse = await api
+        .get(`/repos/${username}/${repoName}/issues/${postId}`)
         .then((res) => res.data)
 
       setPost({
@@ -47,14 +51,25 @@ export function Post() {
         id: response.number,
         link: response.html_url,
       })
+    } finally {
+      setIsLoading(false)
     }
-    fetchPost()
   }, [postId])
+
+  useEffect(() => {
+    fetchPost()
+  }, [fetchPost])
 
   return (
     <PostContainer>
-      <PostInfo post={post} />
-      <PostContent content={post.content} />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <PostInfo post={post} />
+          <PostContent content={post.content} />
+        </>
+      )}
     </PostContainer>
   )
 }

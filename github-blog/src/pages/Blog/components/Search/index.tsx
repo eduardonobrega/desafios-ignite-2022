@@ -5,7 +5,7 @@ import * as zod from 'zod'
 
 interface SearchProps {
   amountPosts: number
-  onFetchPosts: (text: string) => Promise<void>
+  onFetchPosts: (text?: string) => Promise<void>
 }
 const searchFormSchema = zod.object({
   query: zod.string(),
@@ -17,7 +17,6 @@ export function Search({ amountPosts, onFetchPosts }: SearchProps) {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { isSubmitting },
   } = useForm<SearchFormInputs>({
     resolver: zodResolver(searchFormSchema),
@@ -28,7 +27,6 @@ export function Search({ amountPosts, onFetchPosts }: SearchProps) {
 
   async function handlePostQuery(data: SearchFormInputs) {
     await onFetchPosts(data.query)
-    reset()
   }
 
   return (
